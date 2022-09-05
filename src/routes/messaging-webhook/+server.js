@@ -14,10 +14,12 @@ export const GET = async ({ url, platform, request }) => {
     const token = url.searchParams.get('hub.verify_token') || null
     const challenge = url.searchParams.get('hub.challenge') || null
 
+    const verifyToken = "8fb2e86ae8884c1da4e7f30bc0cea7cf"
+
     // Check if a token and mode is in the query string of the request
     if (mode && token) {
         // Check the mode and token sent is correct
-        if (mode === "subscribe" && token === config.verifyToken) {
+        if (mode === "subscribe" && token === verifyToken) {
             // Respond with the challenge token from the request
             //console.log("WEBHOOK_VERIFIED");
             platform.env.LOGS && await platform.env.LOGS.put(kvlogId, `WEBHOOK_VERIFIED | ${localized_date.toGMTString()} | mode: ${mode} token: ${token} challenge: ${challenge}`)
