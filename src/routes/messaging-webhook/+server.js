@@ -29,4 +29,5 @@ export const GET = async ({ url, platform, request }) => {
             throw error(403);
         }
     }
+    return new Response(String("Nothing from Facebook"));
 }
