@@ -43,9 +43,8 @@ export const POST = async ({ platform, request }) => {
         const requestBody = await request.json()
 
         //console.log('POST: Someone is pinging me!');
-        //platform.env.LOGS && await platform.env.LOGS.put(`POST_${kvLogId}`, JSON.stringify(requestBody))
-        //return new Response(String("OK"));
-        return new Response(JSON.stringify(requestBody));
+        platform.env.LOGS && await platform.env.LOGS.put(`POST_${kvLogId}`, JSON.stringify(requestBody))
+        return new Response(String("OK"));
     } catch (error) {
         platform.env.LOGS && await platform.env.LOGS.put(`POST_ERROR_${kvLogId}`, JSON.stringify(error))
         throw error(500);
