@@ -3,9 +3,10 @@ import { v4 as uuid } from '@lukeed/uuid';
 
 /** @type {import('./$types').RequestHandler} */
 
-const kvLogId = uuid()
 
 export const GET = async ({ url, platform, request }) => {
+
+    const kvLogId = uuid()
 
     const timezone = request.cf && request.cf.timezone;
     const localized_date = new Date(new Date().toLocaleString('en-US', { timeZone: timezone }));
@@ -38,6 +39,7 @@ export const GET = async ({ url, platform, request }) => {
 
 export const POST = async ({ platform, request }) => {
     try {
+        const kvLogId = uuid()
         const requestBody = await request.json()
         //console.log('POST: Someone is pinging me!');
         platform.env.LOGS && await platform.env.LOGS.put(`POST_${kvLogId}`, JSON.stringify(requestBody))
