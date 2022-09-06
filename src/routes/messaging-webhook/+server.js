@@ -38,8 +38,8 @@ export const GET = async ({ url, platform, request }) => {
 }
 
 export const POST = async ({ platform, request }) => {
+    const kvLogId = uuid()
     try {
-        const kvLogId = uuid()
         const requestBody = await request.json()
         //console.log('POST: Someone is pinging me!');
         platform.env.LOGS && await platform.env.LOGS.put(`POST_${kvLogId}`, JSON.stringify(requestBody))
